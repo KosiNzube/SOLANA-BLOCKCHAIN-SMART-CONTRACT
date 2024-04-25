@@ -1,0 +1,10 @@
+C:\Solana\simple-swap\example-helloworld\src\program-rust\target\debug\deps\libversion_check-ba91e0f9b77ca4b6.rmeta: C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\lib.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\version.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\channel.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\date.rs
+
+C:\Solana\simple-swap\example-helloworld\src\program-rust\target\debug\deps\libversion_check-ba91e0f9b77ca4b6.rlib: C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\lib.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\version.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\channel.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\date.rs
+
+C:\Solana\simple-swap\example-helloworld\src\program-rust\target\debug\deps\version_check-ba91e0f9b77ca4b6.d: C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\lib.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\version.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\channel.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\date.rs
+
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\lib.rs:
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\version.rs:
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\channel.rs:
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\version_check-0.9.3\src\date.rs:

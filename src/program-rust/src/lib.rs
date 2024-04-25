@@ -1,4 +1,9 @@
-use borsh::{BorshDeserialize, BorshSerialize};
+use anchor_lang::prelude::*;
+use anchor_spl::token::{Token, TokenAccount};
+use serum_dex::{
+    instruction::MarketInstruction,
+    matching::{OrderType, Side},
+};
 use solana_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint,
@@ -6,95 +11,125 @@ use solana_program::{
     msg,
     program_error::ProgramError,
     pubkey::Pubkey,
+    rent::Rent,
+    system_instruction,
 };
 
-/// Define the type of state stored in accounts
-#[derive(BorshSerialize, BorshDeserialize, Debug)]
-pub struct GreetingAccount {
-    /// number of greetings
-    pub counter: u32,
+// Define our custom instruction types
+#[derive(AnchorSerialize, AnchorDeserialize, Debug)]
+pub struct InitializeSwapPool {
+    pub source_mint: Pubkey,
+    pub target_mint: Pubkey,
+    pub pool_fee: u8, // Fee taken on swaps (percentage)
 }
 
-// Declare and export the program's entrypoint
-entrypoint!(process_instruction);
-
-// Program entrypoint's implementation
-pub fn process_instruction(
-    program_id: &Pubkey, // Public key of the account the hello world program was loaded into
-    accounts: &[AccountInfo], // The account to say hello to
-    _instruction_data: &[u8], // Ignored, all helloworld instructions are hellos
-) -> ProgramResult {
-    msg!("Hello World Rust program entrypoint");
-
-    // Iterating accounts is safer than indexing
-    let accounts_iter = &mut accounts.iter();
-
-    // Get the account to say hello to
-    let account = next_account_info(accounts_iter)?;
-
-    // The account must be owned by the program in order to modify its data
-    if account.owner != program_id {
-        msg!("Greeted account does not have the correct program id");
-        return Err(ProgramError::IncorrectProgramId);
-    }
-
-    // Increment and store the number of times the account has been greeted
-    let mut greeting_account = GreetingAccount::try_from_slice(&account.data.borrow())?;
-    greeting_account.counter += 1;
-    greeting_account.serialize(&mut &mut account.data.borrow_mut()[..])?;
-
-    msg!("Greeted {} time(s)!", greeting_account.counter);
-
-    Ok(())
+#[derive(AnchorSerialize, AnchorDeserialize, Debug)]
+pub struct SwapInstruction {
+    pub source_amount: u64,      // Amount of source token (SOL) to swap
+    pub min_target_amount: u64,  // Minimum amount of target token (USDT) to receive
 }
 
-// Sanity tests
-#[cfg(test)]
-mod test {
+#[program]
+pub mod solana_swap {
     use super::*;
-    use solana_program::clock::Epoch;
-    use std::mem;
 
-    #[test]
-    fn test_sanity() {
-        let program_id = Pubkey::default();
-        let key = Pubkey::default();
-        let mut lamports = 0;
-        let mut data = vec![0; mem::size_of::<u32>()];
-        let owner = Pubkey::default();
-        let account = AccountInfo::new(
-            &key,
-            false,
-            true,
-            &mut lamports,
-            &mut data,
-            &owner,
-            false,
-            Epoch::default(),
-        );
-        let instruction_data: Vec<u8> = Vec::new();
+    // Define constants
+    const SERUM_DEX_PROGRAM_ID: Pubkey = Pubkey::new_from_array([
+        0x42, 0x9e, 0x0d, 0x3b, 0x48, 0x3c, 0x90, 0x98, 0x40, 0x80, 0xf4, 0x2e, 0xcd, 0x57, 0xfa, 0x07,
+        0xff, 0x5a, 0x1f, 0x5b, 0xc2, 0xdc, 0x67, 0x5b, 0x6a, 0x6a, 0x3a, 0xa9, 0xf9, 0x40, 0x06, 0x6e,
+    ]);
+    const MINT_DECIMALS: u8 = 6;
 
-        let accounts = vec![account];
+    // Initialize a new swap pool
+    #[access_control(initialize_pool_control)]
+    pub fn initialize_swap_pool(ctx: Context<InitializeSwapPool>, data: InitializeSwapPool) -> ProgramResult {
+        let pool_account = &mut ctx.accounts.pool_account;
 
-        assert_eq!(
-            GreetingAccount::try_from_slice(&accounts[0].data.borrow())
-                .unwrap()
-                .counter,
-            0
-        );
-        process_instruction(&program_id, &accounts, &instruction_data).unwrap();
-        assert_eq!(
-            GreetingAccount::try_from_slice(&accounts[0].data.borrow())
-                .unwrap()
-                .counter,
-            1
-        );
-        process_instruction(&program_id, &accounts, &instruction_data).unwrap();
-        assert_eq!(
-            GreetingAccount::try_from_slice(&accounts[0].data.borrow())
-                .unwrap()
-                .counter,
-            2
-        );
+        // Set pool configuration based on data received
+        pool_account.mint.decimals = MINT_DECIMALS;
+        pool_account.mint.pubkey = data.source_mint;
+
+        // Validate provided target mint
+        if data.target_mint == Pubkey::default() {
+            msg!("Error: Target mint pubkey not provided");
+            return Err(ProgramError::InvalidArgument);
+        }
+        pool_account.target_mint = data.target_mint;
+
+        // Validate pool fee
+        if data.pool_fee > 100 {
+            msg!("Error: Invalid pool fee. Fee must be less than or equal to 100%");
+            return Err(ProgramError::InvalidArgument);
+        }
+        pool_account.pool_fee = data.pool_fee;
+
+        Ok(())
     }
+
+    // Perform a token swap (using Serum DEX)
+    pub fn swap(ctx: Context<SwapInstruction>, data: SwapInstruction) -> ProgramResult {
+        let sol_amount = data.source_amount;
+
+        // Extract accounts from the provided slice
+        let accounts_iter = &mut ctx.accounts.iter();
+
+        // Get the serum DEX market account
+        let market_account = next_account_info(accounts_iter)?;
+
+        // Validate the market account owner
+        if market_account.owner != &SERUM_DEX_PROGRAM_ID {
+            msg!("Error: Invalid Serum DEX market account owner");
+            return Err(ProgramError::IncorrectProgramId);
+        }
+
+        // Get user's source token (SOL) account and target token (USDT) account
+        let source_account = next_account_info(accounts_iter)?;
+        let target_account = next_account_info(accounts_iter)?;
+
+        // Create a new instruction to swap SOL for USDT on the Serum DEX market
+        let instruction = MarketInstruction::NewOrderV3(
+            serum_dex::instruction::NewOrderInstructionV3 {
+                side: Side::Ask,
+                limit_price: None, // Set limit price based on fetched data
+                max_coin_qty: sol_amount,
+                order_type: OrderType::ImmediateOrCancel,
+                client_id: 0, // Replace with unique client ID if needed
+                self_trade_behavior: serum_dex::matching::SelfTradeBehavior::DecrementTake,
+                limit: None,
+            },
+        );
+
+        // Send the instruction to the Serum DEX market account
+        serum_dex::instruction::market::new_order_v3(
+            &ctx.accounts.program_id,
+            &market_account.key,
+            &instruction,
+        )?;
+
+        Ok(())
+    }
+
+    // Access control logic for initializing the pool
+    fn initialize_pool_control(
+        ctx: Context<InitializeSwapPool>,
+        _data: &InitializeSwapPool,
+    ) -> Result<()> {
+        // Add access control logic for initializing the pool
+        // For example, check if the caller is the expected initializer
+        // Replace the condition below with your own access control logic
+        if *ctx.accounts.initializer.key != ctx.accounts.pool_account.key {
+            return Err(ProgramError::MissingRequiredSignature);
+        }
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct InitializeSwapPoolContext<'info> {
+    #[account(init, mint::decimals = MINT_DECIMALS, payer = initializer, space = 8 + 16 + 16)]
+    pub pool_account: Account<'info, TokenAccount>,
+    #[account(mut)]
+    pub initializer: Signer<'info>,
+    pub system_program: AccountInfo<'info>,
+    pub rent: AccountInfo<'info>,
 }

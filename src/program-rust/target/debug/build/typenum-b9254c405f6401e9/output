@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=C:\Solana\simple-swap\example-helloworld\src\program-rust\target\debug\build\typenum-b9254c405f6401e9\out\consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=C:\Solana\simple-swap\example-helloworld\src\program-rust\target\debug\build\typenum-b9254c405f6401e9\out\op.rs

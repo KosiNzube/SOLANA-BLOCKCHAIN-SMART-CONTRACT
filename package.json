@@ -17,7 +17,7 @@
     "clean": "npm run clean:program-c && npm run clean:program-rust",
     "build:program-c": "V=1 make -C ./src/program-c helloworld",
     "clean:program-c": "V=1 make -C ./src/program-c clean",
-    "build:program-rust": "cargo build-bpf --manifest-path=./src/program-rust/Cargo.toml --bpf-out-dir=dist/program",
+    "build:program-rust": "rustup run nightly cargo build-sbf --manifest-path=./src/program-rust/Cargo.toml --sbf-out-dir=dist/program",
     "clean:program-rust": "cargo clean --manifest-path=./src/program-rust/Cargo.toml && rm -rf ./dist",
     "test:program-rust": "cargo test-bpf --manifest-path=./src/program-rust/Cargo.toml",
     "pretty": "prettier --write '{,src/**/}*.ts'"

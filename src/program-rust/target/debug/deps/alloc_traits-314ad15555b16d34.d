@@ -1,0 +1,10 @@
+C:\Solana\simple-swap\SOLUSDT\src\program-rust\target\debug\deps\liballoc_traits-314ad15555b16d34.rmeta: C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\lib.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\layout.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\local.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\util.rs
+
+C:\Solana\simple-swap\SOLUSDT\src\program-rust\target\debug\deps\liballoc_traits-314ad15555b16d34.rlib: C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\lib.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\layout.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\local.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\util.rs
+
+C:\Solana\simple-swap\SOLUSDT\src\program-rust\target\debug\deps\alloc_traits-314ad15555b16d34.d: C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\lib.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\layout.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\local.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\util.rs
+
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\lib.rs:
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\layout.rs:
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\local.rs:
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\alloc-traits-0.1.1\src\util.rs:

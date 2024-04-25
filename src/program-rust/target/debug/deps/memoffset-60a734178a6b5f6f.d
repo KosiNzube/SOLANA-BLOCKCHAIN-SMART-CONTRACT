@@ -1,0 +1,10 @@
+C:\Solana\simple-swap\example-helloworld\src\program-rust\target\debug\deps\libmemoffset-60a734178a6b5f6f.rmeta: C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\lib.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\raw_field.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\offset_of.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\span_of.rs
+
+C:\Solana\simple-swap\example-helloworld\src\program-rust\target\debug\deps\libmemoffset-60a734178a6b5f6f.rlib: C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\lib.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\raw_field.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\offset_of.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\span_of.rs
+
+C:\Solana\simple-swap\example-helloworld\src\program-rust\target\debug\deps\memoffset-60a734178a6b5f6f.d: C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\lib.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\raw_field.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\offset_of.rs C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\span_of.rs
+
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\lib.rs:
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\raw_field.rs:
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\offset_of.rs:
+C:\Users\Agbanelo\ Kellix\.cargo\registry\src\index.crates.io-6f17d22bba15001f\memoffset-0.6.4\src\span_of.rs:
