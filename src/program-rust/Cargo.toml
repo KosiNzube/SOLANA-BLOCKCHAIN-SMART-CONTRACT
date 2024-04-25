@@ -1,27 +1,27 @@
 
 [package]
-name = "solana-bpf-helloworld"
+name = "swapcontract"
 version = "0.0.1"
 description = "Example template program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.com>"]
 repository = "https://github.com/solana-labs/solana"
 license = "Apache-2.0"
 homepage = "https://solana.com/"
-ed$ cargo update
-ition = "2018"
+edition = "2018"
+
 
 [features]
 no-entrypoint = []
-anchor-lang = "0.30.0"
 [dependencies]
 borsh = "0.9.3"
 borsh-derive = "0.10.0"
-solana-program = "~1.10.35"
+solana-program = "1.18.11"
+anchor-lang = "0.30.0"
 serum_dex = "0.5.4"
 [dev-dependencies]
-solana-program-test = "~1.10.35"
-solana-sdk = "~1.10.35"
-
+solana-program-test = "1.18.11"
+solana-sdk = "1.18.11"
+anchor-spl = "0.30.0"
 [lib]
-name = "helloworld"
+name = "swapcontract"
 crate-type = ["cdylib", "lib"]
